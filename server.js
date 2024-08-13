@@ -58,24 +58,19 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   }
 });
 
-app.get("/proxy/meeting", async (req, res) => {
+app.get("/reviews", async (req, res) => {
   const { meetingKey, encryptPwd } = req.query;
 
   try {
     const response = await axios.get(
-      "https://meeting.zoho.in/meeting/login/embedmeeting.jsp",
+      "https://api.zembra.io/reviews/subscription/practo?slug=doctor/dr-sasikumar-muthu-cosmetic-plastic-surgeon&limit=1",
       {
-        params: {
-          meetingKey,
-          newWindow: false,
-          t: encryptPwd,
+        headers: {
+          Authorization: `Bearer uWu63Bl7LgYxCbmxAD8umccD2dH4Se4tU5tcQCoZKnlHnvEU9rUcBSETvF5zwqBAaH90Lu8A4rjntFvgln0p3lBn88cZKU2cjWJul6gPNr4020aZIJwPPeGJYMStBZQC`,
         },
-        responseType: "text",
-        maxRedirects: 0, // Adjust if needed
       }
     );
-    res.set("Content-Type", "text/html"); // Ensure correct content type
-    res.send(response.data);
+    res.json(response.data);
   } catch (error) {
     res.status(500).send("Error fetching meeting content");
   }
