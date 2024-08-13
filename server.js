@@ -81,10 +81,6 @@ app.get("/proxy/meeting", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Proxy server running on http://localhost:${port}`);
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
