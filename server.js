@@ -11,6 +11,8 @@ const REFRESH_TOKEN =
   "1000.0064f3a097043a840201bc6f6828a2d4.63bf354524b63346cc8d3970d189c3b5";
 const redirectURI = "https://talentakeaways.com";
 
+const baseURL = "https://meeting.zoho.in";
+
 let accessToken = null;
 let tokenExpiryTime = null;
 
@@ -62,7 +64,7 @@ app.post("/embedded", async (req, res) => {
   const { meetingKey, encryptPwd } = req.body;
   try {
     const response = await axios.get(
-      `https://meeting.zoho.in/meeting/login/join.jsp?key=1351848187&name=Aakash&viewer=html5&join=false&t=d8e528b4a3aae6d8558062b6fa17a042f4ca591acab07a5443650b67b0b4685f`
+      `${baseURL}/meeting/login/join.jsp?key=1351848187&name=Aakash&viewer=html5&t=d8e528b4a3aae6d8558062b6fa17a042f4ca591acab07a5443650b67b0b4685f`
     );
     res.send(response.data);
   } catch (error) {
