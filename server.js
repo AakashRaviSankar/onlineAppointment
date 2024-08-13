@@ -58,13 +58,6 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   }
 });
 
-const express = require("express");
-const axios = require("axios");
-const app = express();
-const port = 3001;
-
-app.use(express.json());
-
 app.get("/proxy/meeting", async (req, res) => {
   const { meetingKey, encryptPwd } = req.query;
 
