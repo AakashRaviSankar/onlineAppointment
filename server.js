@@ -58,12 +58,19 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   }
 });
 
+const express = require("express");
+const axios = require("axios");
+const app = express();
+const port = 3001;
+
+app.use(express.json());
+
 app.get("/proxy/meeting", async (req, res) => {
   const { meetingKey, encryptPwd } = req.query;
 
   try {
     const response = await axios.get(
-      `https://meeting.zoho.in/meeting/login/embedmeeting.jsp`,
+      "https://meeting.zoho.in/meeting/login/embedmeeting.jsp",
       {
         params: {
           meetingKey,
@@ -71,12 +78,18 @@ app.get("/proxy/meeting", async (req, res) => {
           t: encryptPwd,
         },
         responseType: "text",
+        maxRedirects: 0, // Adjust if needed
       }
     );
+    res.set("Content-Type", "text/html"); // Ensure correct content type
     res.send(response.data);
   } catch (error) {
     res.status(500).send("Error fetching meeting content");
   }
+});
+
+app.listen(port, () => {
+  console.log(`Proxy server running on http://localhost:${port}`);
 });
 
 app.listen(PORT, () => {
