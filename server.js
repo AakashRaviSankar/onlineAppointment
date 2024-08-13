@@ -60,7 +60,7 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
 
 app.post("/embedded", async (req, res) => {
   const { meetingKey, encryptPwd } = req.body;
-  const url = `https://meeting.zoho.in/meeting/login/join.jsp?key=${meetingKey}&name=Aakash&viewer=html5&t=${encryptPwd}`;
+  const url = `https://meeting.zoho.in/meeting/login/embed-join-meeting.jsp?name=Aakash&key=1374315143&t=572ca5a6d62c1fd4200eae4160fd1e6b24231ba448104adb436a84f6641853be&fdownload=false&srcPPP=false&retryL=false`;
 
   console.log("Requesting URL:", url);
 
