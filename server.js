@@ -58,6 +58,20 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   }
 });
 
+app.post("/embedded", async (req, res) => {
+  const { meetingKey, encryptPwd } = req.body;
+  try {
+    const response = await axios.get(
+      `https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${meetingKey}&newWindow=false&t=${encryptPwd}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res
+      .status(error.response?.status || 500)
+      .json(error.response?.data || { error: "Server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
