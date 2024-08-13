@@ -64,7 +64,7 @@ app.post("/embedded", async (req, res) => {
     const response = await axios.get(
       `https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${meetingKey}&newWindow=false&t=${encryptPwd}`
     );
-    response.data;
+    res.json(response.data);
   } catch (error) {
     res
       .status(error.response?.status || 500)
