@@ -58,6 +58,20 @@ app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   }
 });
 
+app.get("/embed", ensureAccessToken, async (req, res) => {
+  const { name, key, t } = req.query;
+  try {
+    const response = await axios.get(
+      `https://meeting.zoho.in/meeting/participant.do?name=${name}&key=${key}&t=${t}`
+    );
+    res.send(response.data);
+  } catch (error) {
+    res
+      .status(error.response?.status || 500)
+      .json(error.response?.data || { error: "Server error" });
+  }
+});
+
 app.get("/reviews", async (req, res) => {
   const { meetingKey, encryptPwd } = req.query;
 
