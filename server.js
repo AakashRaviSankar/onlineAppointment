@@ -73,11 +73,11 @@ app.get("/embed", ensureAccessToken, async (req, res) => {
 });
 
 app.get("/reviews", async (req, res) => {
-  const { meetingKey, encryptPwd } = req.query;
+  const { limit } = req.query;
 
   try {
     const response = await axios.get(
-      "https://api.zembra.io/reviews/subscription/practo?slug=doctor/dr-sasikumar-muthu-cosmetic-plastic-surgeon&limit=1",
+      `https://api.zembra.io/reviews/subscription/practo?slug=doctor/dr-sasikumar-muthu-cosmetic-plastic-surgeon&limit=${limit}`,
       {
         headers: {
           Authorization: `Bearer uWu63Bl7LgYxCbmxAD8umccD2dH4Se4tU5tcQCoZKnlHnvEU9rUcBSETvF5zwqBAaH90Lu8A4rjntFvgln0p3lBn88cZKU2cjWJul6gPNr4020aZIJwPPeGJYMStBZQC`,
