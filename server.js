@@ -90,6 +90,18 @@ app.get("/reviews", async (req, res) => {
   }
 });
 
+app.post("/parentForm", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `http://ttipl-uat.com:60161/enrollement/store`,
+      req.body
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching meeting content");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
