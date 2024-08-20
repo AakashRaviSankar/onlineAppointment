@@ -5,10 +5,10 @@ const cors = require("cors"); // Import the cors middleware
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const CLIENT_ID = "1000.CS2Y4EMV1BTPQU1XO6LKQK3RBNFRME";
-const CLIENT_SECRET = "b4a539c9cd2decfe9bab524eb212b70c6812d79dc0";
+const CLIENT_ID = "1000.AVDZT61LRQZ05BM18YQWSIN1K95QFL";
+const CLIENT_SECRET = "0eba6d33ccd839c018df42be71bc35a61cb1ac8b46";
 const REFRESH_TOKEN =
-  "1000.0064f3a097043a840201bc6f6828a2d4.63bf354524b63346cc8d3970d189c3b5";
+  "1000.70779468453365ee18d5701abad55f80.02d32562b4795328aedf691d7d14c66c";
 const redirectURI = "https://talentakeaways.com";
 
 let accessToken = null;
@@ -43,7 +43,7 @@ const ensureAccessToken = async (req, res, next) => {
 app.get("/api/zoho", ensureAccessToken, async (req, res) => {
   try {
     const response = await axios.get(
-      "https://meeting.zoho.in/api/v2/60031615187/sessions.json",
+      "https://meeting.zoho.in/api/v2/60031939241/sessions.json",
       {
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
