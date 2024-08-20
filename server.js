@@ -90,15 +90,18 @@ app.get("/reviews", async (req, res) => {
   }
 });
 
+const axios = require("axios");
+
 app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
-      `http://ttipl-uat.com:60161/enrollement/store`,
+      "http://ttipl-uat.com:60161/enrollement/store",
       req.body
     );
     res.json(response.data);
   } catch (error) {
-    res.status(500).send("Error fetching meeting content");
+    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(500).send("Error posting form data");
   }
 });
 
