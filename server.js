@@ -90,8 +90,6 @@ app.get("/reviews", async (req, res) => {
   }
 });
 
-const axios = require("axios");
-
 app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
