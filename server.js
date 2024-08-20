@@ -96,7 +96,7 @@ app.post("/parentForm", async (req, res) => {
       "http://ttipl-uat.com:60161/enrollement/store",
       req.body
     );
-    res.json(response.data);
+    res.send(response.data);
   } catch (error) {
     console.error("Error posting to /enrollement/store:", error.message);
     res.status(500).send("Error posting form data");
