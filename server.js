@@ -146,6 +146,56 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
+app.post("/internship", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "http://ttipl-uat.com:60161/internship",
+      req.body
+    );
+
+    res.send(response.data);
+  } catch (error) {
+    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(500).send("Error posting form data");
+  }
+});
+
+app.get("/testimonial/home", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "http://ttipl-uat.com:60162/api/testimonial/home"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching meeting content");
+  }
+});
+
+app.get("/testimonial/isms", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "http://ttipl-uat.com:60162/api/testimonial/isms"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching meeting content");
+  }
+});
+
+app.post("/blog/comment", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "http://ttipl-uat.com:60162/api/blog/comment/mail",
+      req.body
+    );
+
+    res.send(response.data);
+  } catch (error) {
+    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(500).send("Error posting form data");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
