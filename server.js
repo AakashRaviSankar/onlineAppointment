@@ -17,16 +17,8 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Directory for saving files
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Filename with timestamp
-  },
-});
 
-const upload = multer({ storage: storage });
+const upload = multer();
 
 const getAccessToken = async () => {
   const response = await axios.post(
