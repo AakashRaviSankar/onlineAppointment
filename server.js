@@ -148,7 +148,7 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
-app.post("/internship", upload.none(), async (req, res) => {
+app.post("/internship", upload.any(), async (req, res) => {
   console.log(req.body);
   try {
     const response = await axios.post(
