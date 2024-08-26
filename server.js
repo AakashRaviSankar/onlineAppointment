@@ -149,13 +149,13 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
-app.post("/internship", upload.any(), async (req, res) => {
+app.post("/internship", async (req, res) => {
   console.log(req.body);
-  console.log([req.body, ...req.files]);
+
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      [req.body, ...req.files],
+      req.body,
       {
         headers: {
           Accept: "application/json",
