@@ -16,6 +16,7 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
+const upload = multer();
 
 const getAccessToken = async () => {
   const response = await axios.post(
@@ -146,7 +147,7 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
-app.post("/internship", async (req, res) => {
+app.post("/internship", upload.none(), async (req, res) => {
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
