@@ -150,7 +150,13 @@ app.post("/internship", async (req, res) => {
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      req.body
+      req.body,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
 
     res.send(response.data);
