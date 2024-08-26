@@ -157,6 +157,7 @@ app.post("/internship", upload.none(), async (req, res) => {
       {
         headers: {
           Accept: "application/json",
+          "Content-Type": "multipart/form-data",
         },
       }
     );
