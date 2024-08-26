@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const qs = require("qs"); // To properly format query strings
 const cors = require("cors"); // Import the cors middleware
+const multer = require("multer");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
