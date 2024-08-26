@@ -17,7 +17,16 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
-const upload = multer();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Directory for saving files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Filename with timestamp
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const getAccessToken = async () => {
   const response = await axios.post(
@@ -148,8 +157,9 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
-app.post("/internship", upload.none(), async (req, res) => {
+app.post("/internship", upload.any(), async (req, res) => {
   console.log(req.body);
+  console.log(req.files);
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
