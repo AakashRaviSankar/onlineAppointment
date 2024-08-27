@@ -154,9 +154,9 @@ app.post("/getStarted", async (req, res) => {
 app.post("/internship", upload.any(), async (req, res) => {
   const data = {
     ...req.body,
-    [req.files[0].fieldname]: req.files[0],
-    [req.files[1].fieldname]: req.files[1],
-    [req.files[2].fieldname]: req.files[2],
+    short_introduction: req.files[0],
+    about_elina: req.files[1],
+    intern_with_elina: req.files[2],
   };
   try {
     console.log(data);
