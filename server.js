@@ -168,6 +168,7 @@ app.post("/internship", upload.any(), async (req, res) => {
     });
   });
 
+  console.log(form);
   try {
     // Send the request to the external API
     const response = await axios.post(
