@@ -219,6 +219,31 @@ app.post("/blog/comment", async (req, res) => {
   }
 });
 
+app.get("api/dailyquotes", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "http://183.83.188.205:60162/api/dailyquotes"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching meeting content");
+  }
+});
+
+app.post("api/newsletters/storedata", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "http://183.83.188.205:60162/api/newsletters/storedata",
+      req.body
+    );
+
+    res.send(response.data);
+  } catch (error) {
+    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(500).send("Error posting form data");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
