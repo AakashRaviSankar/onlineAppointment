@@ -20,7 +20,7 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer();
 
 const getAccessToken = async () => {
   const response = await axios.post(
@@ -152,25 +152,22 @@ app.post("/getStarted", async (req, res) => {
 });
 
 app.post("/internship", upload.any(), async (req, res) => {
+  const data = {
+    ...req.body,
+    short_introduction: req.files[0],
+    about_elina: req.files[1],
+    intern_with_elina: req.files[2],
+  };
   try {
-    const formData = new FormData();
-
-    // Append text fields
-    Object.keys(req.body).forEach((key) => {
-      formData.append(key, req.body[key]);
-    });
-
-    // Append files
-    req.files.forEach((file) => {
-      formData.append(file.fieldname, file.buffer, file.originalname);
-    });
-
+    console.log(data);
+    // Send the request to the external API
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      formData,
+      data,
       {
         headers: {
-          ...formData.getHeaders(),
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
         },
       }
     );
@@ -181,6 +178,7 @@ app.post("/internship", upload.any(), async (req, res) => {
     res.status(500).send("Error posting form data");
   }
 });
+
 app.get("/testimonial/home", async (req, res) => {
   try {
     const response = await axios.get(
