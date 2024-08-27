@@ -6,6 +6,8 @@ const multer = require("multer");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const FormData = require("form-data");
+
 const CLIENT_ID = "1000.AVDZT61LRQZ05BM18YQWSIN1K95QFL";
 const CLIENT_SECRET = "0eba6d33ccd839c018df42be71bc35a61cb1ac8b46";
 const REFRESH_TOKEN =
@@ -153,20 +155,30 @@ app.post("/internship", async (req, res) => {
   console.log(req.body);
 
   try {
+    // Create a new FormData instance
+    const formData = new FormData();
+
+    // Append each field from req.body to the formData
+    for (const key in req.body) {
+      formData.append(key, req.body[key]);
+    }
+
+    // If you're sending files, you should append them separately
+    // formData.append('fileField', fs.createReadStream('/path/to/file'));
+
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      req.body,
+      formData,
       {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
+          ...formData.getHeaders(), // This sets the correct Content-Type
         },
       }
     );
 
     res.send(response.data);
   } catch (error) {
-    console.error("Error posting to /enrollement/store:", error.message);
+    console.error("Error posting to /internship:", error.message);
     res.status(500).send("Error posting form data");
   }
 });
