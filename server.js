@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 const FormData = require("form-data");
 const fs = require("fs");
+const path = require("path");
 
 const CLIENT_ID = "1000.AVDZT61LRQZ05BM18YQWSIN1K95QFL";
 const CLIENT_SECRET = "0eba6d33ccd839c018df42be71bc35a61cb1ac8b46";
@@ -152,22 +153,29 @@ app.post("/getStarted", async (req, res) => {
 });
 
 app.post("/internship", upload.any(), async (req, res) => {
-  const data = {
-    ...req.body,
-    short_introduction: req.files[0],
-    about_elina: req.files[1],
-    intern_with_elina: req.files[2],
-  };
+  const form = new FormData();
+
+  // Add non-file fields
+  Object.keys(req.body).forEach((key) => {
+    form.append(key, req.body[key]);
+  });
+
+  // Add file fields
+  req.files.forEach((file) => {
+    form.append(file.fieldname, file.buffer, {
+      filename: file.originalname,
+      contentType: file.mimetype,
+    });
+  });
+
   try {
-    console.log(data);
     // Send the request to the external API
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      data,
+      form,
       {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
+          ...form.getHeaders(), // Include the headers from FormData
         },
       }
     );
