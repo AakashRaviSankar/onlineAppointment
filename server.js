@@ -20,7 +20,7 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer();
 
 const getAccessToken = async () => {
   const response = await axios.post(
@@ -152,40 +152,22 @@ app.post("/getStarted", async (req, res) => {
 });
 
 app.post("/internship", upload.any(), async (req, res) => {
+  const data = {
+    ...req.body,
+    [req.files[0].fieldname]: req.files[0],
+    [req.files[1].fieldname]: req.files[1],
+    [req.files[2].fieldname]: req.files[2],
+  };
   try {
-    const formData = new FormData();
-
-    // Append text fields
-    formData.append("name", req.body.name);
-    formData.append("date_of_birth", req.body.date_of_birth);
-    formData.append("contact_number", req.body.contact_number);
-    formData.append(
-      "parent_guardian_contact_number",
-      req.body.parent_guardian_contact_number
-    );
-    formData.append("start_date_with_elina", req.body.start_date_with_elina);
-    formData.append(
-      "hours_intern_elina_per_week",
-      req.body.hours_intern_elina_per_week
-    );
-    formData.append("email_address", req.body.email_address);
-    formData.append("agreement", req.body.agreement);
-    formData.append("g-recaptcha-response", req.body["g-recaptcha-response"]);
-
-    // Append files
-    req.files.forEach((file) => {
-      formData.append(file.fieldname, file.buffer, file.originalname);
-    });
-
-    console.log(formData);
+    console.log(data);
     // Send the request to the external API
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
-      formData,
+      data,
       {
         headers: {
-          ...formData.getHeaders(),
           Accept: "application/json",
+          "Content-Type": "multipart/form-data",
         },
       }
     );
