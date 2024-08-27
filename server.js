@@ -177,7 +177,7 @@ app.post("/internship", upload.any(), async (req, res) => {
       formData.append(file.fieldname, file.buffer, file.originalname);
     });
 
-    console.log([...formData]);
+    console.log(formData);
     // Send the request to the external API
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
