@@ -232,7 +232,7 @@ app.post("/blog/comment", async (req, res) => {
   }
 });
 
-app.get("api/dailyquotes", async (req, res) => {
+app.get("/api/dailyquotes", async (req, res) => {
   try {
     const response = await axios.get(
       "http://183.83.188.205:60162/api/dailyquotes"
@@ -243,7 +243,7 @@ app.get("api/dailyquotes", async (req, res) => {
   }
 });
 
-app.post("api/newsletters/storedata", async (req, res) => {
+app.post("/api/newsletters/storedata", async (req, res) => {
   try {
     const response = await axios.post(
       "http://183.83.188.205:60162/api/newsletters/storedata",
