@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const FormData = require("form-data");
+const fs = require("fs");
 
 const CLIENT_ID = "1000.AVDZT61LRQZ05BM18YQWSIN1K95QFL";
 const CLIENT_SECRET = "0eba6d33ccd839c018df42be71bc35a61cb1ac8b46";
@@ -19,8 +20,7 @@ let tokenExpiryTime = null;
 
 app.use(cors());
 app.use(express.json());
-
-const upload = multer();
+const upload = multer({ storage: multer.memoryStorage() });
 
 const getAccessToken = async () => {
   const response = await axios.post(
@@ -151,27 +151,40 @@ app.post("/getStarted", async (req, res) => {
   }
 });
 
-app.post("/internship", async (req, res) => {
-  console.log(req.body);
-
+app.post("/internship", upload.any(), async (req, res) => {
   try {
-    // Create a new FormData instance
     const formData = new FormData();
 
-    // Append each field from req.body to the formData
-    for (const key in req.body) {
-      formData.append(key, req.body[key]);
-    }
+    // Append text fields
+    formData.append("name", req.body.name);
+    formData.append("date_of_birth", req.body.date_of_birth);
+    formData.append("contact_number", req.body.contact_number);
+    formData.append(
+      "parent_guardian_contact_number",
+      req.body.parent_guardian_contact_number
+    );
+    formData.append("start_date_with_elina", req.body.start_date_with_elina);
+    formData.append(
+      "hours_intern_elina_per_week",
+      req.body.hours_intern_elina_per_week
+    );
+    formData.append("email_address", req.body.email_address);
+    formData.append("agreement", req.body.agreement);
+    formData.append("g-recaptcha-response", req.body["g-recaptcha-response"]);
 
-    // If you're sending files, you should append them separately
-    // formData.append('fileField', fs.createReadStream('/path/to/file'));
+    // Append files
+    req.files.forEach((file) => {
+      formData.append(file.fieldname, file.buffer, file.originalname);
+    });
 
+    // Send the request to the external API
     const response = await axios.post(
       "http://ttipl-uat.com:60161/internship",
       formData,
       {
         headers: {
-          ...formData.getHeaders(), // This sets the correct Content-Type
+          ...formData.getHeaders(),
+          Accept: "application/json",
         },
       }
     );
