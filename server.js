@@ -220,13 +220,25 @@ app.get("/testimonial/isms", async (req, res) => {
   }
 });
 
+app.post("/api/newinquires/storedata", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "http://183.83.188.205:60162/api/newinquires/storedata",
+      req.body
+    );
+    res.send(response.data);
+  } catch (error) {
+    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(500).send("Error posting form data");
+  }
+});
+
 app.post("/blog/comment", async (req, res) => {
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60162/api/blog/comment/mail",
       req.body
     );
-
     res.send(response.data);
   } catch (error) {
     console.error("Error posting to /enrollement/store:", error.message);
