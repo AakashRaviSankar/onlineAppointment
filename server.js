@@ -229,7 +229,7 @@ app.post("/api/newinquires/storedata", async (req, res) => {
     res.send(response.data);
   } catch (error) {
     console.error("Error posting to /enrollement/store:", error.message);
-    res.status(500).send("Error posting form data");
+    res.status(500).sendStatus("Error posting form data");
   }
 });
 
@@ -239,9 +239,15 @@ app.post("/blog/comment", async (req, res) => {
       "http://ttipl-uat.com:60162/api/blog/comment/mail",
       req.body
     );
-    res.send(response.data);
+
+    console.log(response.status);
+    if (response.status === 200) {
+      res.send({ message: "Success", data: response.data });
+    } else {
+      res.send({ message: "Failure", data: response.data });
+    }
   } catch (error) {
-    console.error("Error posting to /enrollement/store:", error.message);
+    console.error("Error posting form data:", error.message);
     res.status(500).send("Error posting form data");
   }
 });
