@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const qs = require("qs"); // To properly format query strings
+const qs = require("qs"); // To properly format query string
 const cors = require("cors"); // Import the cors middleware
 const multer = require("multer");
 const app = express();
