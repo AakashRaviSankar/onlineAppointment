@@ -198,6 +198,17 @@ app.post("/internship", upload.any(), async (req, res) => {
   }
 });
 
+app.get("api/blog_comment", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "http://183.83.188.205:60162/api/blog_comment"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching meeting content");
+  }
+});
+
 app.get("/testimonial/home", async (req, res) => {
   try {
     const response = await axios.get(
