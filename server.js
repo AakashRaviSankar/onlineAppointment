@@ -98,7 +98,7 @@ app.get("/reviews", async (req, res) => {
 app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://ttipl-uat.com:60161/enrollement/store",
+      "http://183.83.188.205:60161/enrollement/store",
       req.body
     );
 
@@ -112,7 +112,7 @@ app.post("/parentForm", async (req, res) => {
 app.post("/serviceProvider", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://ttipl-uat.com:60162/api/serviveprovider/storedata",
+      "http://183.83.188.205:60162/api/serviveprovider/storedata",
       req.body
     );
 
@@ -126,7 +126,7 @@ app.post("/serviceProvider", async (req, res) => {
 app.post("/schoolForm", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://ttipl-uat.com:60162/api/schoolenrollment/storedata",
+      "http://183.83.188.205:60162/api/schoolenrollment/storedata",
       req.body
     );
 
@@ -140,7 +140,7 @@ app.post("/schoolForm", async (req, res) => {
 app.post("/getStarted", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://ttipl-uat.com:60162/api/mayi_helpyou/mail",
+      "http://183.83.188.205:60162/api/mayi_helpyou/mail",
       req.body
     );
 
@@ -181,7 +181,7 @@ app.post("/internship", upload.any(), async (req, res) => {
 
     // Send the request to the external API
     const response = await axios.post(
-      "http://ttipl-uat.com:60161/internship",
+      "http://183.83.188.205:60161/internship",
       formData,
       {
         headers: {
@@ -201,7 +201,7 @@ app.post("/internship", upload.any(), async (req, res) => {
 app.get("/testimonial/home", async (req, res) => {
   try {
     const response = await axios.get(
-      "http://ttipl-uat.com:60162/api/testimonial/home"
+      "http://183.83.188.205:60162/api/testimonial/home"
     );
     res.json(response.data);
   } catch (error) {
@@ -212,7 +212,7 @@ app.get("/testimonial/home", async (req, res) => {
 app.get("/testimonial/isms", async (req, res) => {
   try {
     const response = await axios.get(
-      "http://ttipl-uat.com:60162/api/testimonial/isms"
+      "http://183.83.188.205:60162/api/testimonial/isms"
     );
     res.json(response.data);
   } catch (error) {
@@ -236,7 +236,7 @@ app.post("/api/newinquires/storedata", async (req, res) => {
 app.post("/blog/comment", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://ttipl-uat.com:60162/api/blog/comment/mail",
+      "http://183.83.188.205:60162/api/blog/comment/mail",
       req.body
     );
 
