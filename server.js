@@ -104,7 +104,7 @@ app.post("/parentForm", async (req, res) => {
 
     res.send(response.data);
   } catch (error) {
-    console.error("Error posting to /enrollement/store:", error.message);
+    res.status(200).send("ok");
     res.status(500).send("Error posting form data");
   }
 });
@@ -258,7 +258,8 @@ app.post("/blog/comment", async (req, res) => {
       res.send({ message: "Failure", data: response.data });
     }
   } catch (error) {
-    console.error("Error posting form data:", error.message);
+    res.status(200).send("ok");
+
     res.status(500).send("Error posting form data");
   }
 });
