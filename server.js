@@ -99,7 +99,7 @@ app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/enrollement/store",
-      req.body
+      req.body,
       {
         headers: {
           Accept: "*",
