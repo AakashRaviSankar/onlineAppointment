@@ -98,8 +98,13 @@ app.get("/reviews", async (req, res) => {
 app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://183.83.188.205:60161/enrollement/store",
+      "http://ttipl-uat.com:60161/enrollement/store",
       req.body
+      {
+        headers: {
+          Accept: "*",
+        },
+      }
     );
 
     res.send(response.data);
