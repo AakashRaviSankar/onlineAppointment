@@ -99,14 +99,9 @@ app.post("/parentForm", async (req, res) => {
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/enrollement/store",
-      req.body,
-      {
-        headers: {
-          Accept: "*",
-        },
-      }
+      req.body
     );
-
+    console.log(req.body);
     res.send(response.data);
   } catch (error) {
     console.error("Error posting to parentform", error.message);
