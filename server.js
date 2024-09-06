@@ -96,12 +96,12 @@ app.get("/reviews", async (req, res) => {
 });
 
 app.post("/parentForm", async (req, res) => {
+  console.log(req.body);
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/enrollement/store",
       req.body
     );
-    console.log(req.body);
     res.send(response.data);
   } catch (error) {
     console.error("Error posting to parentform", error.message);
