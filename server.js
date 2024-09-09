@@ -111,6 +111,7 @@ app.post("/parentForm", async (req, res) => {
 });
 
 app.post("/serviceProvider", async (req, res) => {
+  console.log(req.body);
   try {
     const response = await axios.post(
       "http://183.83.188.205:60162/api/serviveprovider/storedata",
