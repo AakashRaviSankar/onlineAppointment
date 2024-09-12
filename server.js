@@ -96,7 +96,6 @@ app.get("/reviews", async (req, res) => {
 });
 
 app.post("/parentForm", async (req, res) => {
-  console.log(req.body);
   try {
     const response = await axios.post(
       "http://ttipl-uat.com:60161/enrollement/store",
@@ -104,11 +103,7 @@ app.post("/parentForm", async (req, res) => {
     );
     res.send(response.data);
   } catch (error) {
-    console.log(error.data);
-    console.log(error.data.message);
-
-    res.status(400).send(error);
-
+    res.status(400).send(error.status);
     res.status(500).send("Error posting form data");
   }
 });
