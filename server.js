@@ -103,7 +103,11 @@ app.post("/parentForm", async (req, res) => {
     );
     res.send(response.data);
   } catch (error) {
-    res.status(400).send(error.status);
+    res.status(400).send({
+      message:
+        "The provided email address has already been registered. Please log in using this email or register with a different email address.",
+      code: 400,
+    });
     res.status(500).send("Error posting form data");
   }
 });
