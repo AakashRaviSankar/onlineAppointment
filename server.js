@@ -104,8 +104,10 @@ app.post("/parentForm", async (req, res) => {
     );
     res.send(response.data);
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.data.message);
+    console.log(error.data);
+    console.log(error.data.message);
+
+    res.status(400).send(error);
 
     res.status(500).send("Error posting form data");
   }
