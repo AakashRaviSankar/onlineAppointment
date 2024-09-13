@@ -215,9 +215,17 @@ app.post("/internship", upload.any(), async (req, res) => {
     res.send(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
+      // res.status(400).send({
+      //   message:
+      //     "The provided email address has already been registered. Please log in using this email or register with a different email address.",
+      //   code: 400,
+      // });
+      const errorMessage =
+        error.response.data.message ||
+        "The provided email address has already been registered. Please log in using this email or register with a different email address.";
+
       res.status(400).send({
-        message:
-          "The provided email address has already been registered. Please log in using this email or register with a different email address.",
+        message: errorMessage,
         code: 400,
       });
     } else {
