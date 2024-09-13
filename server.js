@@ -228,6 +228,11 @@ app.post("/internship", upload.any(), async (req, res) => {
         message: errorMessage,
         code: 400,
       });
+      console.log(
+        error.response.data.message,
+        error.response.status,
+        error.response
+      );
     } else {
       res.status(500).send("Error posting form data");
     }
