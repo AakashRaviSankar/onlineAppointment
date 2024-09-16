@@ -210,8 +210,8 @@ app.post("/internship", upload.any(), async (req, res) => {
       }
     );
 
-    res.send(response.data);
-    console.log("response data : ", response.data);
+    if (!response.data.includes("<!DOCTYPE html>\r\n")) res.send(response.data);
+    else res.send(response);
   } catch (error) {
     if (error.response && error.response.status === 400) {
       res.status(400).send({
@@ -220,7 +220,11 @@ app.post("/internship", upload.any(), async (req, res) => {
         code: 400,
       });
     } else {
-      res.status(500).send("Error posting form data");
+      res.status(400).send({
+        message:
+          "The provided email address has already been registered. Please log in using this email or register with a different email address.",
+        code: 400,
+      });
     }
   }
 });
