@@ -211,6 +211,7 @@ app.post("/internship", upload.any(), async (req, res) => {
     );
 
     res.send(response.data);
+    console.log("response data : ", response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
       res.status(400).send({
