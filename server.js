@@ -198,8 +198,6 @@ app.post("/internship", upload.any(), async (req, res) => {
       formData.append(file.fieldname, file.buffer, file.originalname);
     });
 
-    console.log(formData);
-
     // Send the request to the external API
     const response = await axios.post(
       "http://183.83.188.205:60161/internship",
@@ -215,24 +213,11 @@ app.post("/internship", upload.any(), async (req, res) => {
     res.send(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      // res.status(400).send({
-      //   message:
-      //     "The provided email address has already been registered. Please log in using this email or register with a different email address.",
-      //   code: 400,
-      // });
-      const errorMessage =
-        error.response.data.message ||
-        "The provided email address has already been registered. Please log in using this email or register with a different email address.";
-
       res.status(400).send({
-        message: errorMessage,
+        message:
+          "The provided email address has already been registered. Please log in using this email or register with a different email address.",
         code: 400,
       });
-      console.log(
-        error.response.data.message,
-        error.response.status,
-        error.response
-      );
     } else {
       res.status(500).send("Error posting form data");
     }
